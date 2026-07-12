@@ -16,8 +16,36 @@ h1 {
 }
 
 .hero {
-    padding: 100px 20px;
-    background: #222;
+    min-height: 100vh; 
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background-size: cover;
+    background-position: center;
+
+    animation: backgroundchange 20s infinite;
+
+    z-index: -2;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    z-index: -1;
 }
 
 section {
