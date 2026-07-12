@@ -5,7 +5,7 @@ const images = [
     "images/backgrounds/Abandoned outpost background.png",
     "images/backgrounds/silverhollow background.png",
     "images/backgrounds/zeppelin background.png",
-    "images/backgrounds/convension background.png"
+    "images/backgrounds/Convension background.png"
 ];
 
 let current = 0;
