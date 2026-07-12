@@ -1,4 +1,5 @@
 const images = [
+
     "images/backgrounds/farm background.png",
     "images/backgrounds/sakura background.png",
     "images/backgrounds/ironhead background.png",
@@ -6,23 +7,72 @@ const images = [
     "images/backgrounds/silverhollow background.png",
     "images/backgrounds/zeppelin background.png",
     "images/backgrounds/Convension background.png"
+
 ];
 
-let current = 0;
+// preload images
 
-const hero =
-document.getElementById("hero");
+images.forEach(src=>{
 
-function changeBackground(){
-    hero.style.backgroundImage =
-    `linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url(${images[current]})`;
+    const img=new Image();
+    img.src=src;
 
-    current++;
-    if(current >= images.length){
-        current = 0;
-    }
+});
+
+const layers=[
+
+    document.querySelector(".bg0"),
+    document.querySelector(".bg1"),
+    document.querySelector(".bg2")
+
+];
+
+let imageIndex=0;
+let layerIndex=0;
+
+function showImage(){
+
+    const layer=layers[layerIndex];
+
+    // Prepare hidden layer
+
+    layer.style.transition="none";
+    layer.style.opacity="0";
+    layer.style.transform="scale(1)";
+    layer.style.backgroundImage=`url("${images[imageIndex]}")`;
+
+    // Force browser redraw
+
+    void layer.offsetWidth;
+
+    // Restore transitions
+
+    layer.style.transition=
+        "opacity 3s ease, transform 12s linear";
+
+    // Begin fade + zoom
+
+    layer.style.opacity="1";
+    layer.style.transform="scale(1.18)";
+
+    // Fade out oldest layer
+
+    const previous=(layerIndex+2)%3;
+
+    layers[previous].style.opacity="0";
+
+    layerIndex++;
+
+    if(layerIndex>2)
+        layerIndex=0;
+
+    imageIndex++;
+
+    if(imageIndex>=images.length)
+        imageIndex=0;
+
 }
 
-changeBackground();
+showImage();
 
-setInterval(changeBackground, 5000);
+setInterval(showImage,6000);
